@@ -1,2 +1,6 @@
 # githublearing
-this is begining of learing java script.
+this is begining of learing .github
+</br>
+aother saransh sahu
+
+
