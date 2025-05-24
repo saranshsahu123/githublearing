@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Resume Analysis Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #ccc;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      color: #000000;
+    }
+
+    .section {
+      margin-bottom: 25px;
+
+    }
+
+    .section h2 {
+      color: #000000;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+
+    .score {
+      font-size: 22px;
+      color: #006400;
+      font-weight: bold;
+    }
+
+    .matched-skills,
+    .company-box {
+      background-color: #eef;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .company-box h4 {
+      margin: 0;
+      padding: 0;
+    }
+
+    .section:hover {
+      scale: 1.03;
+    }
+
+    .company-box:hover {
+      scale: 1.01;
+    }
+
+    a{
+      text-decoration: none;
+      color: rgb(0, 37, 248);
+      margin-left: 1rem ;
+    }
+
+    .media-link{
+      margin: 1rem 1rem ;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Resume Analysis Result</h1>
+  <div class="container">
+
+    <h2>Basic Information</h2>
+    <div class="section">
+      <p><strong>Name:</strong> {{ data.name }}</p>
+      <p><strong>Job Role:</strong> {{ data.job_role }}</p>
+      <p><strong>Email:</strong> {{ data.email }}</p>
+      <p><strong>Phone:</strong> {{ data.phone }}</p>
+      <p><strong>Degree:</strong> {{ data.degree|default:"Not Found" }}</p>
+      <p><strong>Project Included:</strong> {{ data.has_project }}</p>
+    </div>
+
+    
+
+
+    <div class="section">
+      <h2>Skills</h2>
+      {% if data.skills %}
+      <ul>
+        {% for skill in data.skills %}
+        <li>{{ skill }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No skills found.</p>
+      {% endif %}
+    </div>
+
+    <div class="section">
+      <h2>Matched Role Skills</h2>
+      {% if data.matched_skills %}
+      <div class="matched-skills">
+        <p><strong>Matched Skills for {{ data.job_role }}:</strong></p>
+        <ul>
+          {% for skill in data.matched_skills %}
+          <li>{{ skill }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      <p>No matched role-specific skills found.</p>
+      {% endif %}
+    </div>
+
+    <div class="section">
+      <h2>Final Resume Rank</h2>
+      <p class="score">{{ data.rank_score }} / 10</p>
+    </div>
+    <div class="section">
+      <h2>Suggested Companies</h2>
+      {% if data.companies %}
+      {% for company in data.companies %}
+      <div class="company-box">
+        <h4>{{ company.company }}</h4>
+        <p>Matched Skills: {{ company.matched_skills|join:", " }}</p>
+        <p>Match Score: {{ company.match_score }}</p>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>No company suggestions based on current skills.</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <a href="https://www.instagram.com/saransh1472/"></a>
+</body>
+
+</html>
